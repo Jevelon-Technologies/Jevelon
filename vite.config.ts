@@ -28,17 +28,7 @@ export default defineConfig({
           router: ['react-router-dom'],
           ui: ['framer-motion', 'lucide-react'],
         },
-        assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.');
-          const ext = info[info.length - 1];
-          if (/\.(css)$/.test(assetInfo.name)) {
-            return `assets/[name].[ext]`;
-          }
-          if (/\.(js)$/.test(assetInfo.name)) {
-            return `assets/[name].[ext]`;
-          }
-          return `assets/[name].[ext]`;
-        },
+        assetFileNames: 'assets/[name].[hash].[ext]',
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js',
       },
