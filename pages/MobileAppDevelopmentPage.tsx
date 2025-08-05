@@ -34,10 +34,16 @@ export default function MobileAppDevelopmentPage() {
     }
   ];
 
+  // Mobile app development technologies
   const technologies = [
-    "React Native", "Flutter", "Swift", "Kotlin", "Xamarin", "Ionic",
-    "Firebase", "AWS Mobile", "Redux", "MobX", "GraphQL", "REST APIs",
-    "Push Notifications", "In-App Purchases", "Analytics", "Crash Reporting"
+    { name: "React Native", logo: "/assets/logos/expo-1.svg" },
+    { name: "Flutter", logo: "/assets/logos/flutter.svg" },
+    { name: "Swift", logo: "/assets/logos/swift-15.svg" },
+    { name: "Kotlin", logo: "/assets/logos/kotlin-1.svg" },
+    { name: "Firebase", logo: "/assets/logos/firebase-1.svg" },
+    { name: "AWS Mobile", logo: "/assets/logos/amazon-web-services-2.svg" },
+    { name: "Apple App Store", logo: "/assets/logos/apple-app-store.svg" },
+    { name: "Google Play", logo: "/assets/logos/google-play-5.svg" }
   ];
 
   const benefits = [
@@ -177,55 +183,20 @@ export default function MobileAppDevelopmentPage() {
             </p>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Vercel" logoPath="/assets/logos/vercel.svg" />
-              </div>
-              <h3 className="font-semibold">Vercel</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="React Native" logoPath="/assets/logos/expo-1.svg" />
-              </div>
-              <h3 className="font-semibold">React Native</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="AWS Mobile" logoPath="/assets/logos/amazon-web-services-2.svg" />
-              </div>
-              <h3 className="font-semibold">AWS Mobile</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Flutter" logoPath="/assets/logos/flutter.svg" />
-              </div>
-              <h3 className="font-semibold">Flutter</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Swift" logoPath="/assets/logos/swift-15.svg" />
-              </div>
-              <h3 className="font-semibold">Swift</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Kotlin" logoPath="/assets/logos/kotlin-1.svg" />
-              </div>
-              <h3 className="font-semibold">Kotlin</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Firebase" logoPath="/assets/logos/firebase-1.svg" />
-              </div>
-              <h3 className="font-semibold">Firebase</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Apple App Store" logoPath="/assets/logos/apple-app-store.svg" />
-              </div>
-              <h3 className="font-semibold">App Store</h3>
-            </div>
-            {/* Add more logos as needed, or use fallback icons for missing ones */}
+            {technologies.map((tech, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <TechnologyLogo name={tech.name} logoPath={tech.logo} />
+                </div>
+                <h3 className="font-semibold">{tech.name}</h3>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

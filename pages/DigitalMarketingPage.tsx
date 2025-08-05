@@ -34,6 +34,7 @@ export default function DigitalMarketingPage() {
     }
   ];
 
+  // Digital marketing services offered
   const services = [
     "Search Engine Optimization (SEO)", "Pay-Per-Click (PPC)", "Social Media Management",
     "Content Marketing", "Email Marketing", "Influencer Marketing",
@@ -163,7 +164,46 @@ export default function DigitalMarketingPage() {
 
       {/* Services Section */}
       <section className="py-20 bg-muted/30">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Our Digital Marketing <span className="text-pink-400">Services</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Comprehensive digital marketing services to grow your online presence
+            </p>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {services.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+                  <CardContent className="p-6">
+                    <div className="flex items-center space-x-3">
+                      <CheckCircle className="h-5 w-5 text-pink-400 flex-shrink-0" />
+                      <span className="font-medium text-foreground">{service}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -34,10 +34,20 @@ export default function WebDevelopmentPage() {
     }
   ];
 
+  // Web development technologies
   const technologies = [
-    "React.js", "Next.js", "Vue.js", "Angular", "Node.js", "Python",
-    "Django", "Laravel", "Express.js", "PostgreSQL", "MongoDB", "Redis",
-    "AWS", "Docker", "Kubernetes", "GraphQL", "REST APIs", "WebSockets"
+    { name: "React", logoPath: "/assets/logos/react.svg" },
+    { name: "Next.js", logoPath: "/assets/logos/Next.js.svg" },
+    { name: "Vue.js", logoPath: "/assets/logos/vuejs.svg" },
+    { name: "Angular", logoPath: "/assets/logos/angular.svg" },
+    { name: "Node.js", logoPath: "/assets/logos/node.js.svg" },
+    { name: "TypeScript", logoPath: "/assets/logos/typescript.svg" },
+    { name: "PostgreSQL", logoPath: "/assets/logos/postgress.svg" },
+    { name: "MongoDB", logoPath: "/assets/logos/mongodb.svg" },
+    { name: "AWS", logoPath: "/assets/logos/amazon-web-services-2.svg" },
+    { name: "Vercel", logoPath: "/assets/logos/vercel.svg" },
+    { name: "Tailwind CSS", logoPath: "/assets/logos/tailwind-css.svg" },
+    { name: "Docker", logoPath: "/assets/logos/docker.svg" }
   ];
 
   const benefits = [
@@ -178,54 +188,20 @@ export default function WebDevelopmentPage() {
             </p>
           </motion.div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="React" logoPath="/assets/logos/react.svg" />
-              </div>
-              <h3 className="font-semibold">React</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Node.js" logoPath="/assets/logos/node.js.svg" />
-              </div>
-              <h3 className="font-semibold">Node.js</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Next.js" logoPath="/assets/logos/Next.js.svg" />
-              </div>
-              <h3 className="font-semibold">Next.js</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="TypeScript" logoPath="/assets/logos/typescript.svg" />
-              </div>
-              <h3 className="font-semibold">TypeScript</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Tailwind CSS" logoPath="/assets/logos/tailwind-css.svg" />
-              </div>
-              <h3 className="font-semibold">Tailwind CSS</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="PostgreSQL" logoPath="/assets/logos/postgress.svg" />
-              </div>
-              <h3 className="font-semibold">PostgreSQL</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="Vercel" logoPath="/assets/logos/vercel.svg" />
-              </div>
-              <h3 className="font-semibold">Vercel</h3>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
-                <TechnologyLogo name="AWS" logoPath="/assets/logos/amazon-web-services-2.svg" />
-              </div>
-              <h3 className="font-semibold">AWS</h3>
-            </div>
+            {technologies.map((tech, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <TechnologyLogo name={tech.name} logoPath={tech.logoPath} />
+                </div>
+                <h3 className="font-semibold">{tech.name}</h3>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
