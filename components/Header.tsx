@@ -24,12 +24,22 @@ export default function Header() {
       if (location.pathname === "/") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        navigate("/");
+        // Navigate to home page and clear any hash fragments
+        navigate("/", { replace: true });
       }
     } else if (href.startsWith("#")) {
       if (location.pathname !== "/") {
-        navigate(`/${href}`);
+        // If not on home page, navigate to home page first, then scroll to section
+        navigate("/", { replace: true });
+        // Use setTimeout to ensure navigation completes before scrolling
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
       } else {
+        // Already on home page, just scroll to section
         const element = document.querySelector(href);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });

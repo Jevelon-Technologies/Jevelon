@@ -1,12 +1,13 @@
 import { Separator } from "./ui/separator";
 import { Linkedin, Twitter, Mail, Instagram } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useScrollToTop } from "../utils/useScrollToTop";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const navigate = useNavigate();
+  const location = useLocation();
   useScrollToTop();
 
   const footerLinks = {
@@ -45,13 +46,25 @@ export default function Footer() {
 
   const handleNavClick = (href: string) => {
     if (href.startsWith("/#")) {
-      // Handle anchor links (same page navigation)
-      setTimeout(() => {
-        const element = document.querySelector(href.substring(1));
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
+      // Handle anchor links - navigate to home page first if not already there
+      if (location.pathname !== "/") {
+        navigate("/", { replace: true });
+        // Use setTimeout to ensure navigation completes before scrolling
+        setTimeout(() => {
+          const element = document.querySelector(href.substring(1));
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } else {
+        // Already on home page, just scroll to section
+        setTimeout(() => {
+          const element = document.querySelector(href.substring(1));
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      }
     } else {
       // Handle page navigation - scroll to top after navigation
       navigate(href);
