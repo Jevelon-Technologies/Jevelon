@@ -33,6 +33,7 @@ export default defineConfig({
         entryFileNames: 'assets/[name].[hash].js',
       },
     },
+    assetsInlineLimit: 0, // Don't inline any assets
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],

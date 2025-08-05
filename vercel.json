@@ -4,6 +4,14 @@
   "framework": "vite",
   "routes": [
     {
+      "src": "/assets/(.*\\.css)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/assets/(.*\\.js)",
+      "dest": "/assets/$1"
+    },
+    {
       "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },
