@@ -36,6 +36,9 @@ export default function Contact() {
     
     try {
       const apiUrl = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
+      console.log('Submitting to:', `${apiUrl}/api/contact/submit/`);
+      console.log('Form data:', formData);
+      
       const response = await fetch(`${apiUrl}/api/contact/submit/`, {
         method: 'POST',
         headers: {
@@ -44,7 +47,11 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+
       const result = await response.json();
+      console.log('Response data:', result);
 
       if (result.success) {
         alert("Thank you for your message! We'll get back to you soon.");
