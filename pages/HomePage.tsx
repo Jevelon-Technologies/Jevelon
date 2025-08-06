@@ -5,6 +5,7 @@ import TechStackStrip from "../components/TechStackStrip";
 import Services from "../components/Services";
 import About from "../components/About";
 import Contact from "../components/Contact";
+import { scrollToSectionMobile, scrollToTopMobile } from "../utils/useScrollToTop";
 
 export default function HomePage() {
   const location = useLocation();
@@ -12,14 +13,18 @@ export default function HomePage() {
   useEffect(() => {
     // Handle hash-based navigation
     if (location.hash) {
-      const el = document.querySelector(location.hash);
-      if (el) {
-        setTimeout(() => {
-          el.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-      }
+      // Wait for components to render
+      setTimeout(() => {
+        scrollToSectionMobile(location.hash);
+      }, 100);
+    } else {
+      // If no hash, ensure we're at the top of the page
+      // This handles cases where user navigates to home page without a hash
+      setTimeout(() => {
+        scrollToTopMobile();
+      }, 100);
     }
-  }, [location.hash]);
+  }, [location.hash, location.pathname]);
 
   return (
     <>

@@ -15,10 +15,6 @@
     <!-- Preconnect to external domains for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://images.unsplash.com" />
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
     
     <title>Jevelon Technologies - IT Services & Solutions</title>
   </head>
@@ -26,18 +22,44 @@
     <div id="root"></div>
     <script type="module" src="/main.tsx"></script>
     
-    <!-- Service Worker Registration -->
+    <!-- Service Worker Registration with Enhanced Error Handling -->
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-              console.log('SW registered: ', registration);
-            })
-            .catch((registrationError) => {
-              console.log('SW registration failed: ', registrationError);
-            });
-        });
+        // Only register service worker in production
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+          window.addEventListener('load', () => {
+            // Add timeout to prevent hanging
+            const registrationTimeout = setTimeout(() => {
+              console.warn('Service worker registration timed out');
+            }, 5000);
+
+            navigator.serviceWorker.register('/sw.js', { scope: '/' })
+              .then((registration) => {
+                clearTimeout(registrationTimeout);
+                console.log('SW registered successfully: ', registration);
+                
+                // Handle updates
+                registration.addEventListener('updatefound', () => {
+                  const newWorker = registration.installing;
+                  if (newWorker) {
+                    newWorker.addEventListener('statechange', () => {
+                      if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        // New content is available
+                        console.log('New content is available');
+                      }
+                    });
+                  }
+                });
+              })
+              .catch((registrationError) => {
+                clearTimeout(registrationTimeout);
+                console.warn('SW registration failed: ', registrationError);
+                
+                // Don't show error to user, just log it
+                // This prevents the "Extension context invalidated" error from affecting UX
+              });
+          });
+        }
       }
     </script>
   </body>

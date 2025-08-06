@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { scrollToSectionMobile, scrollToTopMobile } from "../utils/useScrollToTop";
+import { debugLog } from "../utils/useMobile";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,34 +21,47 @@ export default function Header() {
   ];
 
   const handleNavClick = (href: string) => {
+    debugLog('Navigation clicked:', href);
+    
+    // Close mobile menu first
+    setIsMenuOpen(false);
+    
     if (href === "/") {
       // If clicking Home and already on home page, scroll to top
       if (location.pathname === "/") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        debugLog('Already on home page, scrolling to top');
+        scrollToTopMobile();
       } else {
-        // Navigate to home page and clear any hash fragments
+        // Navigate to home page and scroll to top after navigation
+        debugLog('Navigating to home page and scrolling to top');
         navigate("/", { replace: true });
+        // Use setTimeout to ensure navigation completes before scrolling to top
+        setTimeout(() => {
+          debugLog('Scrolling to top after navigation');
+          scrollToTopMobile();
+        }, 500);
       }
     } else if (href.startsWith("#")) {
+      debugLog('Hash navigation:', href);
+      
       if (location.pathname !== "/") {
         // If not on home page, navigate to home page first, then scroll to section
+        debugLog('Navigating to home page first');
         navigate("/", { replace: true });
         // Use setTimeout to ensure navigation completes before scrolling
         setTimeout(() => {
-          const element = document.querySelector(href);
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 100);
+          debugLog('Scrolling to section after navigation');
+          scrollToSectionMobile(href);
+        }, 500); // Increased timeout for better reliability
       } else {
         // Already on home page, just scroll to section
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
+        debugLog('Already on home page, scrolling directly');
+        scrollToSectionMobile(href);
       }
+    } else {
+      // For regular page navigation, just navigate
+      navigate(href);
     }
-    setIsMenuOpen(false);
   };
 
   return (
@@ -190,11 +205,12 @@ export default function Header() {
                   transition={{ delay: navItems.length * 0.1 }}
                   className="pt-2"
                 >
-                  <Link to="/#contact" onClick={() => setIsMenuOpen(false)}>
-                    <Button className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3">
-                      Get Started
-                    </Button>
-                  </Link>
+                  <button 
+                    onClick={() => handleNavClick("#contact")}
+                    className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 px-4 rounded-lg transition-colors duration-200"
+                  >
+                    Get Started
+                  </button>
                 </motion.div>
               </div>
             </motion.div>

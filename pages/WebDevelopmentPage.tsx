@@ -5,8 +5,11 @@ import { CheckCircle, Globe, ShoppingCart, Database, Zap, ArrowRight, Code, User
 import { Link } from "react-router-dom";
 import PageHeader from "../components/shared/PageHeader";
 import TechnologyLogo from "../components/ui/TechnologyLogo";
+import { useMobile } from "../utils/useMobile";
 
 export default function WebDevelopmentPage() {
+  const { isMobile } = useMobile();
+
   const features = [
     {
       title: "Full-Stack Solutions",
@@ -72,9 +75,9 @@ export default function WebDevelopmentPage() {
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8 }}
             >
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
                 Web Development
@@ -98,9 +101,9 @@ export default function WebDevelopmentPage() {
               </div>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : 50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, delay: isMobile ? 0.1 : 0.2 }}
               className="relative"
             >
               <div className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-2xl p-8 text-white">
@@ -149,7 +152,7 @@ export default function WebDevelopmentPage() {
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.6, delay: isMobile ? index * 0.05 : index * 0.1 }}
                 >
                   <Card className="h-full hover:shadow-lg transition-shadow duration-300">
                     <CardHeader className="text-center">
@@ -193,7 +196,7 @@ export default function WebDevelopmentPage() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: isMobile ? index * 0.05 : index * 0.1 }}
                 className="text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -211,9 +214,9 @@ export default function WebDevelopmentPage() {
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
                 Why Choose Our <span className="text-purple-400">Web Development</span>
@@ -225,9 +228,9 @@ export default function WebDevelopmentPage() {
                 {benefits.map((benefit, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: isMobile ? 0 : -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    transition={{ duration: 0.4, delay: isMobile ? index * 0.05 : index * 0.1 }}
                     className="flex items-start space-x-3"
                   >
                     <CheckCircle className="h-5 w-5 text-purple-400 mt-0.5 flex-shrink-0" />
@@ -237,9 +240,9 @@ export default function WebDevelopmentPage() {
               </div>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: isMobile ? 0.6 : 0.8, delay: isMobile ? 0.1 : 0.2 }}
               className="space-y-6"
             >
               <Card className="p-6">

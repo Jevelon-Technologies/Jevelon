@@ -80,7 +80,13 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-
+/* Privacy Note Styling */
+.privacy-note {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+  margin-top: 15px;
+  text-align: center;
+}
 
 @layer base {
   * {

@@ -26,11 +26,26 @@ export default defineConfig({
         assetFileNames: 'assets/[name].[hash].[ext]',
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js',
+        // Optimize for mobile
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          ui: ['framer-motion', 'lucide-react'],
+        },
       },
     },
     assetsInlineLimit: 0, // Don't inline any assets
+    // Mobile optimizations
+    target: 'es2015', // Better mobile compatibility
+    chunkSizeWarningLimit: 1000, // Increase warning limit for mobile
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
+    // Exclude problematic dependencies
+    exclude: ['@vite/client', '@vite/env'],
+  },
+  // Mobile-specific optimizations
+  esbuild: {
+    target: 'es2015',
   },
 })

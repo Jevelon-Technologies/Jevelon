@@ -33,6 +33,37 @@ const PageLoader = () => (
 function AppContent() {
   useScrollToTop();
 
+  // Add error boundary for mobile devices
+  useEffect(() => {
+    const handleError = (event: ErrorEvent) => {
+      // Suppress "Extension context invalidated" errors
+      if (event.error && event.error.message && 
+          event.error.message.includes('Extension context invalidated')) {
+        event.preventDefault();
+        console.warn('Suppressed extension context error');
+        return false;
+      }
+    };
+
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      // Suppress extension-related promise rejections
+      if (event.reason && typeof event.reason === 'string' && 
+          event.reason.includes('Extension context invalidated')) {
+        event.preventDefault();
+        console.warn('Suppressed extension context promise rejection');
+        return false;
+      }
+    };
+
+    window.addEventListener('error', handleError);
+    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+
+    return () => {
+      window.removeEventListener('error', handleError);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen dark">
       <Header />
