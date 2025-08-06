@@ -7,16 +7,23 @@ from django.conf import settings
 from .models import Contact
 from .serializers import ContactSerializer
 import json
+import logging
+
+logger = logging.getLogger(__name__)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def submit_contact(request):
     """Handle contact form submissions"""
     try:
+        # Log the incoming request data for debugging
+        logger.info(f"Contact form submission received: {request.data}")
+        
         # Create contact record
         serializer = ContactSerializer(data=request.data)
         if serializer.is_valid():
             contact = serializer.save()
+            logger.info(f"Contact record created successfully: {contact.id}")
             
             # Send email notification to admin
             email_sent = False
@@ -26,6 +33,7 @@ def submit_contact(request):
                 
                 Name: {contact.name}
                 Email: {contact.email}
+                Phone: {contact.phone or 'Not provided'}
                 Service: {contact.service}
                 Message: {contact.message}
                 
@@ -41,10 +49,10 @@ def submit_contact(request):
                 )
                 
                 email_sent = True
-                print(f"✅ Email sent successfully to {settings.ADMIN_EMAIL}")
+                logger.info(f"✅ Email sent successfully to {settings.ADMIN_EMAIL}")
                 
             except Exception as e:
-                print(f"❌ Error sending email: {e}")
+                logger.error(f"❌ Error sending email: {e}")
                 email_sent = False
             
             # Update email_sent status
@@ -56,12 +64,15 @@ def submit_contact(request):
                 'message': 'Contact form submitted successfully'
             }, status=status.HTTP_201_CREATED)
         else:
+            logger.error(f"❌ Serializer validation failed: {serializer.errors}")
             return Response({
                 'success': False,
-                'errors': serializer.errors
+                'errors': serializer.errors,
+                'error': 'Validation failed. Please check your input.'
             }, status=status.HTTP_400_BAD_REQUEST)
             
     except Exception as e:
+        logger.error(f"❌ Unexpected error in submit_contact: {e}")
         return Response({
             'success': False,
             'error': str(e)
