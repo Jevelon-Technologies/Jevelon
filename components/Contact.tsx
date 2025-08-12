@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,12 +14,34 @@ export default function Contact() {
     service: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  // Debug: Log the API URL on component mount
+  useEffect(() => {
+    const apiUrl = (import.meta as any).env?.VITE_API_URL || 
+                  (window.location.hostname === 'localhost' ? 'http://localhost:8000' : 'https://jevelon-backend.onrender.com');
+    console.log('🔍 Debug - Current API URL:', apiUrl);
+    console.log('🔍 Debug - Environment variable VITE_API_URL:', (import.meta as any).env?.VITE_API_URL);
+    console.log('🔍 Debug - Current hostname:', window.location.hostname);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
     
     try {
-      const apiUrl = (import.meta as any).env?.VITE_API_URL || 'http://localhost:8000';
+      // Get API URL from environment or use fallback
+      const apiUrl = (import.meta as any).env?.VITE_API_URL || 
+                    (window.location.hostname === 'localhost' ? 'http://localhost:8000' : 'https://jevelon-backend.onrender.com');
+      
+      console.log('Submitting to API:', `${apiUrl}/api/contact/submit/`);
+      console.log('Form data:', formData);
+      
       const response = await fetch(`${apiUrl}/api/contact/submit/`, {
         method: 'POST',
         headers: {
@@ -28,18 +50,42 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
 
-      if (result.success) {
-        alert("Thank you for your message! We'll get back to you soon.");
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        // If not JSON, get the text to see what we're getting
+        const textResponse = await response.text();
+        console.error('Non-JSON response received:', textResponse.substring(0, 200));
+        throw new Error('Server returned non-JSON response. Please check the API URL.');
+      }
+
+      const result = await response.json();
+      console.log('Response data:', result);
+
+      if (response.ok && result.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: "Thank you for your message! We'll get back to you soon."
+        });
         // Reset form
         setFormData({ name: "", email: "", phone: "", service: "", message: "" });
       } else {
-        alert(`Error: ${result.error || 'Something went wrong'}`);
+        setSubmitStatus({
+          type: 'error',
+          message: `Error: ${result.error || result.errors || 'Something went wrong'}`
+        });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("An error occurred while submitting your message. Please try again.");
+      setSubmitStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : "An error occurred while submitting your message. Please try again."
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -93,6 +139,16 @@ export default function Contact() {
               <CardTitle>Send Us a Message</CardTitle>
             </CardHeader>
             <CardContent>
+              {submitStatus.type && (
+                <div className={`mb-4 p-3 rounded-lg ${
+                  submitStatus.type === 'success' 
+                    ? 'bg-green-100 text-green-800 border border-green-200' 
+                    : 'bg-red-100 text-red-800 border border-red-200'
+                }`}>
+                  {submitStatus.message}
+                </div>
+              )}
+              
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
@@ -164,11 +220,15 @@ export default function Contact() {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                  Schedule My Free Consultation
+                <Button 
+                  type="submit" 
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Submitting...' : 'Schedule My Free Consultation'}
                 </Button>
 
-                <p className="privacy-note">
+                <p className="privacy-note text-sm text-gray-600">
                   We respect your privacy. Your information will not be shared.
                 </p>
               </form>
