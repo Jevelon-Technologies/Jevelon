@@ -4,6 +4,7 @@ import SplashScreen from "./components/SplashScreen";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useScrollToTop } from "./utils/useScrollToTop";
+import { useSEO } from "./utils/useSEO";
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -32,6 +33,7 @@ const PageLoader = () => (
 
 function AppContent() {
   useScrollToTop();
+  useSEO();
 
   // Add error boundary for mobile devices
   useEffect(() => {

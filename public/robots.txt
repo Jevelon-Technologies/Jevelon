@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+
+# Allow all other pages
+Allow: /services/
+Allow: /blog/
+Allow: /case-studies/
+Allow: /team/
+Allow: /faq/
+Allow: /support/
+Allow: /careers/
+Allow: /privacy/
+Allow: /terms/
+Allow: /cookies/
+Allow: /disclaimer/
+
+# Sitemap location
+Sitemap: https://jevelon.com/sitemap.xml
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1

@@ -59,9 +59,9 @@ export default function Hero() {
               variants={itemVariants}
               className="text-4xl md:text-6xl font-bold text-foreground mb-8 leading-relaxed overflow-visible pb-8"
             >
-              Empowering Your Business with 
+              Web Development & IT Services for 
               <span className="text-blue-400 inline-block align-baseline pb-2">
-                 Cutting-Edge Technology
+                 Business Growth
               </span>
             </motion.h1>
             

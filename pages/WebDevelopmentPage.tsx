@@ -80,8 +80,8 @@ export default function WebDevelopmentPage() {
               transition={{ duration: isMobile ? 0.6 : 0.8 }}
             >
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                Web Development
-                <span className="text-purple-400 block">That Works</span>
+                Custom Web Development
+                <span className="text-purple-400 block">Services & Solutions</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 We create complete web solutions that combine beautiful design with powerful functionality. Our <Link to="/services/frontend-development" className="text-purple-400 hover:text-purple-300 underline">frontend</Link> and <Link to="/services/backend-development" className="text-purple-400 hover:text-purple-300 underline">backend</Link> development approach ensures your web application is built to perform and scale.
