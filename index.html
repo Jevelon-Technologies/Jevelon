@@ -40,6 +40,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <title>Web Development & IT Services | Jevelon Technologies</title>
+    
+    <!-- Fix for white screen issue on first visit -->
+    <script>
+      // Clear problematic cache on first visit
+      if (!localStorage.getItem('jevelon_visited')) {
+        try {
+          // Clear any existing service workers
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then((registrations) => {
+              for (let registration of registrations) {
+                registration.unregister();
+              }
+            });
+          }
+          
+          // Mark as visited
+          localStorage.setItem('jevelon_visited', 'true');
+        } catch (e) {
+          console.warn('Could not clear service workers:', e);
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
