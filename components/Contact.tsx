@@ -98,7 +98,7 @@ export default function Contact() {
       icon: Mail,
       title: "Email",
       value: "hello@jevelon.com",
-      href: "mailto:hello@jevelon.com"
+      href: "mailto:jevelontechnologies@gmail.com"
     },
     {
       icon: Phone,
@@ -200,7 +200,8 @@ export default function Contact() {
                       <SelectItem value="backend-development">Backend Development</SelectItem>
                       <SelectItem value="web-development">Web Development</SelectItem>
                       <SelectItem value="mobile-app-development">Mobile App Development</SelectItem>
-                      <SelectItem value="digital-marketing">Digital Marketing</SelectItem>
+                      {/* Digital Marketing is not offered as a service at this time; retain this option for future activation.
+                      <SelectItem value="digital-marketing">Digital Marketing</SelectItem> */}
                       <SelectItem value="consulting">Consulting</SelectItem>
                       <SelectItem value="other">Other / Not Sure Yet</SelectItem>
                     </SelectContent>

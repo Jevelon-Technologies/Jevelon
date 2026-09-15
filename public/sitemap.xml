@@ -33,12 +33,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- Digital Marketing is not offered as a service at this time; retain this sitemap entry for future activation.
   <url>
     <loc>https://jevelon.com/services/digital-marketing</loc>
     <lastmod>2024-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-  </url>
+  </url> -->
 
   <!-- Content Pages -->
   <url>

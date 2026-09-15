@@ -13,11 +13,17 @@ export default function PrivacyPolicyPage() {
     },
     {
       title: "Information We Collect",
+      /* The removed Digital Marketing service should not be listed in this live policy.
       content: "The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information. If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide. When you register for an Account or request our services (web development, mobile app development, digital marketing, etc.), we may ask for your contact information, including items such as name, company name, address, email address, and telephone number."
+      */
+      content: "When you register for an Account or request our services, we may ask for contact information such as your name, company name, address, email address, and telephone number."
     },
     {
       title: "How We Use Your Information",
+      /* The removed Digital Marketing service should not be listed in this live policy.
       content: "We use the information we collect in various ways, including to: Provide, operate, and maintain our website and services; Improve, personalize, and expand our website and service offerings; Understand and analyze how you use our website; Develop new products, services, features, and functionality for web development, mobile app development, and digital marketing; Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to our services, and for marketing and promotional purposes; Send you emails about our services and updates; Find and prevent fraud; Process payments and manage client relationships."
+      */
+      content: "We use the information we collect to provide, operate, and maintain our website and services; improve our offerings; understand how our website is used; develop web development and mobile app development services; communicate with you; prevent fraud; process payments; and manage client relationships."
     },
     {
       title: "Log Files",
@@ -53,11 +59,14 @@ export default function PrivacyPolicyPage() {
     },
     {
       title: "Law And Jurisdiction",
+      /* The removed Digital Marketing service should not be listed in this live policy.
       content: "By visiting the Website, or using any of our Services (web development, mobile app development, digital marketing, etc.), you agree that your Personal Information will be handled as described in this Policy. Your use of our Website or Services and any dispute over privacy, are subject to this Policy and our Website Terms of Use, including its applicable limitations on damages and the resolution of disputes. Jevelon Technologies Terms of Use are incorporated by reference into this Policy."
+      */
+      content: "By visiting the Website or using our Services, you agree that your Personal Information will be handled as described in this Policy. Your use of our Website or Services and any dispute over privacy are subject to this Policy and our Website Terms of Use, including its applicable limitations on damages and the resolution of disputes. Jevelon Technologies Terms of Use are incorporated by reference into this Policy."
     },
     {
       title: "Contact Us",
-      content: "For any legal concern/question, please contact us at hello@jevelon.com or through our contact form on the website."
+      content: "For any legal concern/question, please contact us at jevelontechnologies@gmail.com or through our contact form on the website."
     }
   ];
 

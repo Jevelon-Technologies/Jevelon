@@ -1,5 +1,7 @@
 import { Button } from "./ui/button";
-import { ArrowRight, Code, Smartphone, Database, Palette, Megaphone } from "lucide-react";
+import { ArrowRight, Code, Smartphone, Database, Palette } from "lucide-react";
+// Digital Marketing is not offered as a service at this time; retain this icon import for future activation.
+// import { Megaphone } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -122,14 +124,15 @@ export default function Hero() {
           {/* Service Icons */}
           <motion.div 
             variants={containerVariants}
-            className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-3xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto"
           >
             {[
               { icon: Palette, label: "Frontend Development", color: "blue", path: "/services/frontend-development" },
               { icon: Database, label: "Backend Development", color: "green", path: "/services/backend-development" },
               { icon: Code, label: "Web Development", color: "purple", path: "/services/web-development" },
               { icon: Smartphone, label: "Mobile App Development", color: "orange", path: "/services/mobile-app-development" },
-              { icon: Megaphone, label: "Digital Marketing", color: "pink", path: "/services/digital-marketing" }
+              // Digital Marketing is not offered as a service at this time; retain this item for future activation.
+              // { icon: Megaphone, label: "Digital Marketing", color: "pink", path: "/services/digital-marketing" }
             ].map((service) => {
               const IconComponent = service.icon;
               return (

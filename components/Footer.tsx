@@ -16,7 +16,8 @@ export default function Footer() {
       { name: "Frontend Development", href: "/services/frontend-development" },
       { name: "Backend Development", href: "/services/backend-development" },
       { name: "Mobile App Development", href: "/services/mobile-app-development" },
-      { name: "Digital Marketing", href: "/services/digital-marketing" }
+      // Digital Marketing is not offered as a service at this time; retain this link for future activation.
+      // { name: "Digital Marketing", href: "/services/digital-marketing" }
     ],
     Company: [
       { name: "About Us", href: "/#about" },
@@ -162,9 +163,24 @@ export default function Footer() {
           <p className="text-muted-foreground text-sm">
             © {currentYear} Jevelon Technologies. All rights reserved.
           </p>
-          <p className="text-muted-foreground text-sm mt-2 md:mt-0">
+          <div className="mt-4 md:mt-0 flex flex-col sm:flex-row items-center gap-3">
+            <p className="text-muted-foreground text-sm">
             Built with ❤️ for growing businesses
           </p>
+            <a
+              href="https://www.refrens.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex rounded-md transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2"
+              aria-label="Accounting powered by Refrens (opens in a new tab)"
+            >
+              <img
+                src="/assets/photos/Accounting-Software-Powered-by-Refrens.webp"
+                alt="Accounting powered by Refrens"
+                className="h-10 w-auto"
+              />
+            </a>
+          </div>
         </motion.div>
       </div>
     </footer>

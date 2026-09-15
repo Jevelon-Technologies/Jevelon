@@ -22,7 +22,8 @@ const FrontendDevelopmentPage = lazy(() => import("./pages/FrontendDevelopmentPa
 const BackendDevelopmentPage = lazy(() => import("./pages/BackendDevelopmentPage"));
 const WebDevelopmentPage = lazy(() => import("./pages/WebDevelopmentPage"));
 const MobileAppDevelopmentPage = lazy(() => import("./pages/MobileAppDevelopmentPage"));
-const DigitalMarketingPage = lazy(() => import("./pages/DigitalMarketingPage"));
+// Digital Marketing is not offered as a service at this time; retain this page import for future activation.
+// const DigitalMarketingPage = lazy(() => import("./pages/DigitalMarketingPage"));
 
 // Loading component for lazy routes
 const PageLoader = () => (
@@ -88,7 +89,8 @@ function AppContent() {
             <Route path="/services/backend-development" element={<BackendDevelopmentPage />} />
             <Route path="/services/web-development" element={<WebDevelopmentPage />} />
             <Route path="/services/mobile-app-development" element={<MobileAppDevelopmentPage />} />
-            <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} />
+            {/* Digital Marketing is not offered as a service at this time; retain this route for future activation.
+            <Route path="/services/digital-marketing" element={<DigitalMarketingPage />} /> */}
             {/* Handle preview_page.html and other unmatched routes */}
             <Route path="/preview_page.html" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />

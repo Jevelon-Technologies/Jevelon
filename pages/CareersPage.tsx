@@ -95,6 +95,7 @@ export default function CareersPage() {
       posted: "4 days ago",
       experience: "1-2 years"
     },
+    /* Digital Marketing is not offered as a service at this time; retain this role for future activation.
     {
       title: "Digital Marketing Specialist",
       department: "Marketing",
@@ -104,7 +105,7 @@ export default function CareersPage() {
       requirements: ["SEO/SEM", "Social media marketing", "Content marketing", "Analytics", "Campaign management", "Creative thinking"],
       posted: "6 days ago",
       experience: "1-2 years"
-    },
+    }, */
     {
       title: "Project Manager",
       department: "Operations",

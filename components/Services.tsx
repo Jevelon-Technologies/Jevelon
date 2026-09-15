@@ -1,5 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Code, Smartphone, Globe, Database, TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
+import { Code, Smartphone, Globe, Database, CheckCircle, ArrowRight } from "lucide-react";
+// Digital Marketing is not offered as a service at this time; retain this icon import for future activation.
+// import { TrendingUp } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -58,6 +60,7 @@ export default function Services() {
         "App Store Deployment"
       ]
     },
+    /* Digital Marketing is not offered as a service at this time; retain this service definition for future activation.
     {
       title: "Digital Marketing",
       description: "Comprehensive digital marketing strategies to grow your online presence",
@@ -70,7 +73,7 @@ export default function Services() {
         "Content Strategy",
         "Analytics & Reporting"
       ]
-    }
+    } */
   ];
 
   const getColorClasses = (color: string) => {

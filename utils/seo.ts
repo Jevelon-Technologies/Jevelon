@@ -54,13 +54,14 @@ export const seoConfigs: Record<string, SEOConfig> = {
     ogDescription: 'Native and cross-platform mobile app development for iOS and Android.'
   },
 
+  /* Digital Marketing is not offered as a service at this time; retain this SEO configuration for future activation.
   '/services/digital-marketing': {
     title: 'Digital Marketing Services | SEO & Growth Marketing | Jevelon',
     description: 'Comprehensive digital marketing services including SEO, social media marketing, and growth strategies. Drive traffic and increase conversions.',
     keywords: 'digital marketing, SEO services, social media marketing, growth marketing, online marketing, lead generation',
     ogTitle: 'Digital Marketing Services | SEO & Growth Marketing',
     ogDescription: 'Comprehensive digital marketing services to drive traffic and increase conversions.'
-  },
+  }, */
 
   // Content Pages
   '/blog': {
